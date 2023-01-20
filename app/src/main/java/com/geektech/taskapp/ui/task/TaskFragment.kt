@@ -1,6 +1,5 @@
 package com.geektech.taskapp.ui.task
 
-import android.os.Binder
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,8 +8,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
-import com.geektech.taskapp.Task
-import com.geektech.taskapp.databinding.FragmentDashboardBinding
+import com.geektech.taskapp.ui.model.Task
 import com.geektech.taskapp.databinding.FragmentTaskBinding
 
 class TaskFragment : Fragment() {
@@ -31,7 +29,8 @@ class TaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnSave.setOnClickListener {
             setFragmentResult(RESULT_TASK, bundleOf("task" to Task(binding.edTitle.text.toString(),
-                binding.edDesc.text.toString())))
+                binding.edDesc.text.toString())
+            ))
             findNavController().navigateUp()
 
         }
