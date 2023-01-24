@@ -1,4 +1,4 @@
-package com.geektech.taskapp.ui.model
+package com.geektech.taskapp.model
 
 data class OnBoard(
     var title:String? = null,

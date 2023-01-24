@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.geektech.taskapp.ui.model.Task
+import com.geektech.taskapp.model.Task
 import com.geektech.taskapp.databinding.ItemTaskBinding
 
 class TaskAdapter():Adapter<TaskAdapter.TaskViewHolder>(){

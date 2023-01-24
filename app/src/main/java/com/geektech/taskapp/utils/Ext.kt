@@ -1,4 +1,4 @@
-package com.geektech.taskapp.ui.utils
+package com.geektech.taskapp.utils
 
 import android.media.Image
 import android.widget.ImageView

@@ -9,12 +9,15 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.geektech.taskapp.R
 import com.geektech.taskapp.databinding.FragmentOnBoardingBinding
+import com.geektech.taskapp.pref.Pref
 import com.geektech.taskapp.ui.onBoarding.adapter.OnBoardingAdapter
 
 
 class OnBoardingFragment : Fragment() {
 
     private lateinit var binding: FragmentOnBoardingBinding
+    private lateinit var pref:Pref
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,15 +28,14 @@ class OnBoardingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        pref=Pref(requireContext())
         val adapter=OnBoardingAdapter(){
+            pref.saveSeen()
             findNavController().navigateUp()
         }
         binding.viewpager.adapter =adapter
         binding.indicator.setViewPager(binding.viewpager)
-
-        binding.viewpager.registerOnPageChangeCallback(
-            object : ViewPager2.OnPageChangeCallback() {
-            })
+        adapter.registerAdapterDataObserver(binding.indicator.adapterDataObserver)
     }
 
 

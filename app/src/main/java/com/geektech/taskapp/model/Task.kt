@@ -1,4 +1,4 @@
-package com.geektech.taskapp.ui.model
+package com.geektech.taskapp.model
 import java.io.Serializable
 
 data class Task(

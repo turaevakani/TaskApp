@@ -6,8 +6,8 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.geektech.taskapp.databinding.ItemOnboardingBinding
-import com.geektech.taskapp.ui.model.OnBoard
-import com.geektech.taskapp.ui.utils.loadImage
+import com.geektech.taskapp.model.OnBoard
+import com.geektech.taskapp.utils.loadImage
 
 class OnBoardingAdapter(private val onClick:()->Unit):Adapter<OnBoardingAdapter.OnBoardingViewHolder>(){
 

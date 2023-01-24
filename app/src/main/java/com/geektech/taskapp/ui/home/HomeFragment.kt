@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import com.geektech.taskapp.R
-import com.geektech.taskapp.ui.model.Task
+import com.geektech.taskapp.model.Task
 import com.geektech.taskapp.databinding.FragmentHomeBinding
 import com.geektech.taskapp.ui.home.adapter.TaskAdapter
 import com.geektech.taskapp.ui.task.TaskFragment

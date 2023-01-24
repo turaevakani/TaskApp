@@ -16,8 +16,10 @@
         android:id="@+id/indicator"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_gravity="bottom|center"
-        android:layout_marginBottom="100dp">
+        app:ci_drawable="@drawable/ic_circle_selected"
+        app:ci_drawable_unselected="@drawable/ic_circle_unselected"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="64dp">
     </me.relex.circleindicator.CircleIndicator3>
 
 </FrameLayout>
