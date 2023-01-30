@@ -1,4 +1,4 @@
-package com.geektech.taskapp.pref
+package com.geektech.taskapp.data
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE

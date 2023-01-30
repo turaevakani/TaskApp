@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import com.geektech.taskapp.databinding.FragmentProfileBinding
-import com.geektech.taskapp.pref.Pref
+import com.geektech.taskapp.data.Pref
 import com.geektech.taskapp.utils.loadImage
 
 

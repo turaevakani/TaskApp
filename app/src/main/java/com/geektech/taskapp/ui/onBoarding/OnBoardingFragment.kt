@@ -6,10 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager2.widget.ViewPager2
-import com.geektech.taskapp.R
 import com.geektech.taskapp.databinding.FragmentOnBoardingBinding
-import com.geektech.taskapp.pref.Pref
+import com.geektech.taskapp.data.Pref
 import com.geektech.taskapp.ui.onBoarding.adapter.OnBoardingAdapter
 
 

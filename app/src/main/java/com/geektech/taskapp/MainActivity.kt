@@ -5,14 +5,12 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.geektech.taskapp.databinding.ActivityMainBinding
-import com.geektech.taskapp.pref.Pref
+import com.geektech.taskapp.data.Pref
 
 class MainActivity : AppCompatActivity() {
 
