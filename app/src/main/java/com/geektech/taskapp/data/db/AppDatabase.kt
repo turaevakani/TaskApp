@@ -1,4 +1,4 @@
-package com.geektech.taskapp.data
+package com.geektech.taskapp.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

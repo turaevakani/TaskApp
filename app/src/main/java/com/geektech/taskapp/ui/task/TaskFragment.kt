@@ -29,9 +29,9 @@ class TaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnSave.setOnClickListener {
-            App.db.TaskDao().insert(Task(
+            App.db.taskDao().insertAll(Task(
                 title = binding.edTitle.text.toString(),
-            description = binding.edDesc.text.toString()))
+                description = binding.edDesc.text.toString()))
             findNavController().navigateUp()
 
         }

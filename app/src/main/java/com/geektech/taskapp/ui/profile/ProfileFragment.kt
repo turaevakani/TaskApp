@@ -35,14 +35,16 @@ class ProfileFragment : Fragment() {
         binding.apply {
             etProfile.setText(pref.getName())
             etAge.setText((pref.getAge()))
+            imgProfile.loadImage(pref.getImage())
 
 
         }
         binding.btnSave.setOnClickListener {
             pref.saveName(binding.etProfile.text.toString())
-    }
-        binding.btnSave.setOnClickListener {
             pref.saveAge(binding.etAge.text.toString())
+            pref.saveImage(image)
+
+
         }
 
         binding.imgProfile.setOnClickListener{

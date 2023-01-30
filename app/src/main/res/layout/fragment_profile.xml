@@ -14,23 +14,56 @@
         android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:layout_margin="30dp"
-        android:src="@drawable/ic_launcher_background"
+        android:background="@color/black"
         app:shapeAppearanceOverlay="@style/roundedImg"/>
 
-    <EditText
-        android:id="@+id/et_profile"
-        android:paddingStart="12dp"
-        android:hint="Write your name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+<!--    <EditText-->
+<!--        android:id="@+id/et_profile"-->
+<!--        android:paddingStart="12dp"-->
+<!--        android:hint="Write your name"-->
+<!--        android:background="@drawable/custom_input"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp"/>-->
 
-    <EditText
-        android:id="@+id/et_age"
-        android:autofillHints="name"
-        android:hint="Enter_your_age"
-        android:layout_marginTop="40dp"
+<!--    <EditText-->
+<!--        android:id="@+id/et_age"-->
+<!--        android:autofillHints="name"-->
+<!--        android:background="@drawable/custom_input"-->
+<!--        android:hint="Enter_your_age"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="40dp"/>-->
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:hint="Name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="40dp"
+        android:hint="Age">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_save"

@@ -2,8 +2,7 @@ package com.geektech.taskapp
 
 import android.app.Application
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.geektech.taskapp.data.AppDatabase
+import com.geektech.taskapp.data.db.AppDatabase
 
 class App: Application() {
 
@@ -16,6 +15,6 @@ class App: Application() {
     }
 
     companion object{
-        lateinit var db:AppDatabase
+        lateinit var db: AppDatabase
     }
 }
