@@ -37,4 +37,22 @@
         android:name="com.geektech.taskapp.ui.onBoarding.OnBoardingFragment"
         android:label="fragment_on_boarding"
         tools:layout="@layout/fragment_on_boarding" />
+ />
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.geektech.taskapp.ui.auth.AuthFragment"
+        android:label="fragment_accept"
+        tools:layout="@layout/fragment_accept" >
+        <action
+            android:id="@+id/action_authFragment_to_acceptFragment4"
+            app:destination="@id/acceptFragment4" />
+    </fragment>
+    <fragment
+        android:id="@+id/acceptFragment4"
+        android:name="com.geektech.taskapp.ui.accept.AcceptFragment"
+        android:label="fragment_accept"
+        tools:layout="@layout/fragment_accept" >
+        <argument android:name="verId"
+            app:argType="string"/>
+    </fragment>
 </navigation>
