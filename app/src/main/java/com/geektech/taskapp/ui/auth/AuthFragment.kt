@@ -19,9 +19,9 @@ import java.util.concurrent.TimeUnit
 
 class AuthFragment : Fragment() {
     private lateinit var binding: FragmentAuthBinding
-    private lateinit var auth:FirebaseAuth
-    private var phoneNumber=""
-    private lateinit var storedVerificationId=""
+    private lateinit var auth: FirebaseAuth
+    private var phoneNumber = ""
+    private  var storedVerificationId = ""
 
 
     override fun onCreateView(
@@ -74,7 +74,7 @@ class AuthFragment : Fragment() {
             token: PhoneAuthProvider.ForceResendingToken
         ) {
             storedVerificationId = verificationId
-            findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToAcceptFragment4(verificationId))
+            findNavController().navigate(AuthFragmentDirections.actionAuthFragmentToAcceptFragment(verificationId))
         }
     }
 

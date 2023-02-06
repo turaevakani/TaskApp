@@ -19,8 +19,8 @@ import com.google.firebase.auth.PhoneAuthProvider
 class AcceptFragment : Fragment() {
     private lateinit var binding: FragmentAcceptBinding
     private lateinit var args: AcceptFragmentArgs
-    private  var auth=FirebaseAuth.getInstance()
-
+    private lateinit var auth: FirebaseAuth
+    private var code = ""
 
 
     override fun onCreateView(
@@ -28,22 +28,24 @@ class AcceptFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentAcceptBinding.inflate(inflater,container,false)
-        // Inflate the layout for this fragment
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        auth = FirebaseAuth.getInstance()
         args= arguments?.let { AcceptFragmentArgs.fromBundle(it) }!!
         binding.btnSend.setOnClickListener {
+            code = binding.etCode.text.toString()
             val credential = PhoneAuthProvider.getCredential(args.verId!!, binding.etCode.text.toString())
-            }
-        signInWithPhoneAuthCredential(credential)
+            signInWithPhoneAuthCredential(credential)
+            findNavController().navigate(AcceptFragmentDirections.actionAcceptFragmentToNavigationHome())
+        }
         }
 
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
+            .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     findNavController().navigate(R.id.navigation_home)
                     val user = task.result?.user

@@ -11,11 +11,14 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.geektech.taskapp.databinding.ActivityMainBinding
 import com.geektech.taskapp.data.Pref
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var pref:Pref
+    private lateinit var auth: FirebaseAuth
+
 
     @SuppressLint("SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,6 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        auth = FirebaseAuth.getInstance()
 
         pref= Pref(this)
         val navView: BottomNavigationView = binding.navView
@@ -30,13 +34,19 @@ class MainActivity : AppCompatActivity() {
 
         if(!pref.isUserSeen())
         navController.navigate(R.id.onBoardingFragment)
+
+        if(auth.currentUser == null){
+            navController.navigate(R.id.authFragment)
+        }
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_home,
                 R.id.navigation_dashboard,
                 R.id.navigation_notifications,
                 R.id.navigation_profile,
-                R.id.taskFragment
+                R.id.taskFragment,
+                R.id.authFragment,
+                R.id.acceptFragment
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
