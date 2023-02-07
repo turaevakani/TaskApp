@@ -7,15 +7,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.navigation.fragment.findNavController
+import com.geektech.taskapp.R
 import com.geektech.taskapp.databinding.FragmentProfileBinding
 import com.geektech.taskapp.data.Pref
 import com.geektech.taskapp.utils.loadImage
+import com.google.firebase.auth.FirebaseAuth
 
 
 class ProfileFragment : Fragment() {
     lateinit var binding: FragmentProfileBinding
     lateinit var pref: Pref
     private lateinit var image: String
+    private lateinit var auth: FirebaseAuth
     private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()){
             uri: Uri? ->
         image = uri.toString()
@@ -43,12 +47,16 @@ class ProfileFragment : Fragment() {
             pref.saveName(binding.etProfile.text.toString())
             pref.saveAge(binding.etAge.text.toString())
             pref.saveImage(image)
-
-
         }
 
         binding.imgProfile.setOnClickListener{
             getContent.launch("image/*")
+        }
+
+        auth = FirebaseAuth.getInstance()
+        binding.btnSignOut.setOnClickListener {    auth.signOut()
+            findNavController().navigate(R.id.authFragment)
+
         }
     }
 

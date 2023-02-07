@@ -1,7 +1,9 @@
 package com.geektech.taskapp.ui.home
 
+import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,17 +17,18 @@ import com.geektech.taskapp.model.Task
 import com.geektech.taskapp.databinding.FragmentHomeBinding
 import com.geektech.taskapp.ui.home.adapter.TaskAdapter
 import com.geektech.taskapp.ui.task.TaskFragment
+import com.geektech.taskapp.utils.isOnline
 import com.geektech.taskapp.utils.showToast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private lateinit var adapter: TaskAdapter
+    private val db = Firebase.firestore
 
-
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
 
@@ -44,15 +47,29 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setData()
+            if (requireContext().isOnline()){
+                getTasks()
+        }else{
+           setData()
+
+            }
         binding.recyclerView.adapter = adapter
         binding.fab.setOnClickListener{
             findNavController().navigate(R.id.taskFragment)
         }
+    }
 
-
+    private fun getTasks(){
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        if (uid!=null){
+            db.collection(uid).get().addOnSuccessListener {
+                val data = it.toObjects(Task::class.java)
+                adapter.addTasks(data)
+            }.addOnFailureListener{}
+        }
     }
 
     private fun onClick(task: Task) {

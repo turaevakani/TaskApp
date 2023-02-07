@@ -75,6 +75,16 @@
         android:textAllCaps="false"
         android:textColor="@color/black"/>
 
+    <Button
+        android:id="@+id/btn_signOut"
+        android:layout_marginTop="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/yellow"
+        android:text="Sign out"
+        android:textAllCaps="false"
+        android:textColor="@color/black"/>
+
 
 
 

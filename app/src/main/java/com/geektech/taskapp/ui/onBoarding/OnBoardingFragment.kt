@@ -27,7 +27,7 @@ class OnBoardingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         pref=Pref(requireContext())
-        val adapter=OnBoardingAdapter(){
+        val adapter=OnBoardingAdapter {
             pref.saveSeen()
             findNavController().navigateUp()
         }

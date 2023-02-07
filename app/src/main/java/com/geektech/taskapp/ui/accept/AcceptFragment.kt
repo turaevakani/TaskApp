@@ -37,7 +37,7 @@ class AcceptFragment : Fragment() {
         args= arguments?.let { AcceptFragmentArgs.fromBundle(it) }!!
         binding.btnSend.setOnClickListener {
             code = binding.etCode.text.toString()
-            val credential = PhoneAuthProvider.getCredential(args.verId!!, binding.etCode.text.toString())
+            val credential = PhoneAuthProvider.getCredential(args.verId, binding.etCode.text.toString())
             signInWithPhoneAuthCredential(credential)
             findNavController().navigate(AcceptFragmentDirections.actionAcceptFragmentToNavigationHome())
         }
