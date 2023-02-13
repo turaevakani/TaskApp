@@ -8,4 +8,6 @@
     <string name="profile">Profile</string>
     <string name="title_profile">title_profile</string>
     <string name="get_started">Get Started</string>
+    <string name="update">Update</string>
+    <string name="save">Save</string>
 </resources>

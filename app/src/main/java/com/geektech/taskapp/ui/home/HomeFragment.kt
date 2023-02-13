@@ -1,6 +1,5 @@
 package com.geektech.taskapp.ui.home
 
-import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
@@ -28,15 +27,32 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private lateinit var adapter: TaskAdapter
     private val db = Firebase.firestore
+    private val uid: String? = null
+
 
     private val binding get() = _binding!!
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = TaskAdapter(this::onClick)
+        adapter = TaskAdapter(this::onClick, this::onTaskClick)
     }
+
+    private fun onTaskClick(task:Task, pos:Int) {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        if (requireContext().isOnline()){
+            if (uid != null) {
+                db.collection(uid!!).get().addOnSuccessListener {
+                    val id = it.documents[pos].id
+                    findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToTaskFragment(task, id))
+                }.addOnFailureListener {
+                    findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToTaskFragment(task))
+
+                }
+            }
+        }else{
+            findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToTaskFragment(task))
+
+        }    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +63,6 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
             if (requireContext().isOnline()){
@@ -73,6 +88,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun onClick(task: Task) {
+
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Yes") { _, _ ->
             App.db.taskDao().delete(task)
@@ -96,4 +112,6 @@ class HomeFragment : Fragment() {
         val tasks = App.db.taskDao().getAll()
         adapter.addTasks(tasks)
     }
+
+
 }

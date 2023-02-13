@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/splashFragment">
+    app:startDestination="@+id/navigation_home">
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.geektech.taskapp.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_taskFragment"
+            app:destination="@id/taskFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -26,7 +30,18 @@
         android:id="@+id/taskFragment"
         android:name="com.geektech.taskapp.ui.task.TaskFragment"
         android:label="Task"
-        tools:layout="@layout/fragment_task" />
+        tools:layout="@layout/fragment_task" >
+        <argument
+            android:defaultValue="@null"
+            android:name="task"
+            app:nullable="true"
+            app:argType="com.geektech.taskapp.model.Task" />
+        <argument
+            android:name="id"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null"/>
+    </fragment>
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.geektech.taskapp.ui.profile.ProfileFragment"
@@ -54,13 +69,7 @@
         tools:layout="@layout/fragment_accept" >
         <argument android:name="verId"
             app:argType="string"/>
-        <action
-            android:id="@+id/action_acceptFragment_to_navigation_home"
-            app:destination="@id/navigation_home" />
+
     </fragment>
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.geektech.taskapp.ui.splash.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" />
+
 </navigation>

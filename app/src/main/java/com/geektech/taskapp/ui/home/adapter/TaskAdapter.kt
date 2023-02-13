@@ -7,15 +7,10 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.geektech.taskapp.model.Task
 import com.geektech.taskapp.databinding.ItemTaskBinding
 
-class TaskAdapter(val onClick: (task: Task) -> Unit):
+class TaskAdapter(val onClick: (task:Task) -> Unit,
+                  private val onTaskClick: (Task,Int) -> Unit):
     Adapter<TaskAdapter.TaskViewHolder>() {
     private val data = arrayListOf<Task>()
-
-
-//    fun addTask(task: Task){
-//        data.add(0, task)
-//        notifyItemChanged(0)
-//    }
 
     fun addTasks(list: List<Task>) {
         data.clear()
@@ -52,6 +47,10 @@ class TaskAdapter(val onClick: (task: Task) -> Unit):
                 onClick(task)
                 true
             }
+            itemView.setOnClickListener {
+                onTaskClick(task, adapterPosition)
+            }
+
         }
 
 

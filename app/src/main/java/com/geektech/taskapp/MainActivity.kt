@@ -2,6 +2,7 @@ package com.geektech.taskapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -12,11 +13,13 @@ import androidx.navigation.ui.setupWithNavController
 import com.geektech.taskapp.databinding.ActivityMainBinding
 import com.geektech.taskapp.data.Pref
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var pref: Pref
+    private lateinit var auth: FirebaseAuth
 
 
     @SuppressLint("SuspiciousIndentation")
@@ -26,8 +29,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        auth = FirebaseAuth.getInstance()
+
+        pref = Pref(this)
+
         val navView: BottomNavigationView = binding.navView
+
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
+
+        if (!pref.isUserSeen()) {
+            navController.navigate(R.id.onBoardingFragment)
+        }
+        if (auth.currentUser == null) {
+            navController.navigate(R.id.authFragment)
+        }
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -40,6 +55,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.acceptFragment
             )
         )
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task->
+            Log.e("kani", "onCreate: " +task.result)
+        }
+
+
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         val bottomNavFragments = arrayListOf(
@@ -49,7 +69,7 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_profile)
         navController.addOnDestinationChangedListener{ controller, destination, arguments ->
             navView.isVisible = bottomNavFragments.contains(destination.id)
-            if (destination.id==R.id.onBoardingFragment || destination.id==R.id.splashFragment){
+            if (destination.id==R.id.onBoardingFragment ){
                 supportActionBar?.hide()
             }else supportActionBar?.show()
             }

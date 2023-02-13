@@ -39,7 +39,7 @@ class AcceptFragment : Fragment() {
             code = binding.etCode.text.toString()
             val credential = PhoneAuthProvider.getCredential(args.verId, binding.etCode.text.toString())
             signInWithPhoneAuthCredential(credential)
-            findNavController().navigate(AcceptFragmentDirections.actionAcceptFragmentToNavigationHome())
+//            findNavController().navigate(AcceptFragmentDirections.actionAcceptFragmentToNavigationHome())
         }
         }
 
@@ -51,7 +51,7 @@ class AcceptFragment : Fragment() {
                     val user = task.result?.user
                 } else {
                     // Sign in failed, display a message and update the UI
-                    Log.w("kani", "signInWithCredential:failure", task.exception)
+//                    Log.w("kani", "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
                     }

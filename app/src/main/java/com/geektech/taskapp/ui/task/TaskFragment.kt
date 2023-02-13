@@ -1,5 +1,6 @@
 package com.geektech.taskapp.ui.task
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.geektech.taskapp.App
+import com.geektech.taskapp.R
 import com.geektech.taskapp.model.Task
 import com.geektech.taskapp.databinding.FragmentTaskBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -19,6 +21,8 @@ import com.google.firebase.ktx.Firebase
 class TaskFragment : Fragment() {
     private lateinit var binding: FragmentTaskBinding
     private val db = Firebase.firestore
+    private lateinit var navArg: TaskFragmentArgs
+    private var task: Task? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,10 +34,45 @@ class TaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnSave.setOnClickListener {
-            onSave()
+        arguments?.let {
+            navArg = TaskFragmentArgs.fromBundle(it)
+            task = navArg.task
         }
-        getClick()
+//        binding.btnSave.setOnClickListener {
+//            onSave()
+//        }
+//        getClick()
+        if (task !=null){
+            binding.edTitle.setText(task?.title)
+            binding.edDesc.setText(task?.description)
+            binding.btnSave.text = getString(R.string.update)
+        }else{
+            binding.btnSave.text = getString(R.string.save)
+        }
+
+        binding.btnSave.setOnClickListener {
+            if (task !=null){
+                onUpdate()
+            }else{
+                onSave()
+            }
+//            getClick()
+        }
+    }
+
+    private fun onUpdate() {
+        task?.title = binding.edTitle.text.toString()
+        task?.description = binding.edDesc.text.toString()
+        task?.let {App.db.taskDao().update(it)}
+        if (navArg.id !=null){
+            FirebaseAuth.getInstance().currentUser?.uid?.let {
+                db.collection(it).document(navArg.id.toString()).update(mapOf(
+                    "title" to task?.title.toString(),
+                    "description" to task?.description.toString()
+                ))
+            }
+        }
+        findNavController().navigateUp()
     }
 
     private fun onSave() {
@@ -63,8 +102,9 @@ class TaskFragment : Fragment() {
         }
     }
 
+
     companion object{
-        const val RESULT_TASK = "result_task"
+        const val RESULT_TASK = "result.task"
     }
 
 }
